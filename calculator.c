@@ -1,25 +1,22 @@
 #include <stdio.h>
 
-int startCalculator();
+int startAndKeepUsingCalculator(int* isStart);
 void printCalculatorOptions();
 int getCalculatorInput();
 void mathChoice(int calculatorButtonPressed);
-void keepUsingCalculator(int* useCalculator);
 void clearKeyboardBuffer();
 
 int main(int argc, char* argv[]) {
-    int useCalculator = startCalculator();
+    int isStart = 1;
+    int useCalculator = startAndKeepUsingCalculator(&isStart);
     while (useCalculator) {
-        printf("In calc");
-        return 0;
 //        printCalculatorOptions();
 //        int calculatorButtonPressed = getCalculatorInput();
 //        mathChoice(calculatorButtonPressed);
-//        keepUsingCalculator(&useCalculator);
+        useCalculator = startAndKeepUsingCalculator(&isStart);
     }
-    printf("Out calc");
-    return 0;
 
+    return 0;
 }
 
 void clearKeyboardBuffer() {
@@ -29,9 +26,14 @@ void clearKeyboardBuffer() {
     } while (ch != '\n');
 }
 
-int startCalculator() {
+int startAndKeepUsingCalculator(int* isStart) {
     char choice;
-    printf("Would you like to use the calculator, (y)es or (n)o: ");
+    if (*isStart) {
+        printf("Would you like to use the calculator, (y)es or (n)o: ");
+        *isStart = 0;
+    } else {
+        printf("Would you like to keep using the calculator, (y)es or (n)o: ");
+    }
     while (1) {
         scanf("%c", &choice);
         clearKeyboardBuffer();
@@ -58,11 +60,6 @@ int getCalculatorInput() {
 }
 
 void mathChoice(int calculatorButtonPressed) {
-
-
-}
-
-void keepUsingCalculator(int* useCalculator) {
 
 
 }
