@@ -11,6 +11,7 @@ int startAndKeepUsingCalculator(int isStart);
 int stayInButton();
 void squareRoots();
 
+
 int main(int argc, char* argv[]) {
     int isStart = 1;
     int useCalculator = startAndKeepUsingCalculator(isStart);
