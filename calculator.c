@@ -1,20 +1,21 @@
 #include <stdio.h>
 
-int startAndKeepUsingCalculator(int isStart);
-void CalculatorOptions(int* isStart);
-void clearKeyboardBuffer();
 void addition();
-void subtraction();
-void multiplication();
+void calculatorOptions(int* isStart);
+void clearKeyboardBuffer();
 void division();
-void squareRoots();
 void logarithms();
+void multiplication();
+void subtraction();
+int startAndKeepUsingCalculator(int isStart);
+int stayInButton();
+void squareRoots();
 
 int main(int argc, char* argv[]) {
     int isStart = 1;
     int useCalculator = startAndKeepUsingCalculator(isStart);
     while (useCalculator) {
-        CalculatorOptions(&isStart);
+        calculatorOptions(&isStart);
         useCalculator = startAndKeepUsingCalculator(isStart);
     }
 
@@ -35,6 +36,7 @@ int startAndKeepUsingCalculator(int isStart) {
     } else {
         printf("Would you like to keep using the calculator, (y)es or (n)o: ");
     }
+
     while (1) {
         scanf("%c", &choice);
         clearKeyboardBuffer();
@@ -51,18 +53,19 @@ int startAndKeepUsingCalculator(int isStart) {
     }
 }
 
-void CalculatorOptions(int* isStart) {
+void calculatorOptions(int* isStart) {
     int noc;
     int choice;
     if (*isStart) {
-        printf("\nYou are now using the calculator\n\n");
+        printf("\nYou are now using the calculator\n");
         *isStart = 0;
     }
 
     while (1) {
         do {
-            printf("What would you like to do,\n"
-                   "0). Quit\t1). Addition\n"
+
+            printf("\nWhat would you like to do,\n"
+                   "0). Quit     \t1). Addition\n"
                    "2). Subtraction\t3). Multiplication\n"
                    "4). Square Root\t5). Logs\nYour choice:  ");
             noc = scanf("%d", &choice);
@@ -70,27 +73,39 @@ void CalculatorOptions(int* isStart) {
             printf("\n");
         } while (noc < 1 || choice < 0 || choice > 5);
 
+
         switch (choice) {
             case 0:
                 return;
-                break;
             case 1:
-                addition();
+                do {
+                    addition();
+                } while (stayInButton());
                 break;
             case 2:
-                subtraction();
+                do {
+                    subtraction();
+                } while (stayInButton());
                 break;
             case 3:
-                multiplication();
+                do {
+                    multiplication();
+                } while (stayInButton());
                 break;
             case 4:
-                division();
+                do {
+                    division();
+                } while (stayInButton());
                 break;
             case 5:
-                squareRoots();
+                do {
+                    squareRoots();
+                } while (stayInButton());
                 break;
             case 6:
-                logarithms();
+                do {
+                    logarithms();
+                } while (stayInButton());
                 break;
         }
     }
@@ -98,7 +113,6 @@ void CalculatorOptions(int* isStart) {
 
 void addition() {
     printf("add\n");
-
 }
 
 void subtraction() {
@@ -124,4 +138,24 @@ void squareRoots() {
 void logarithms() {
     printf("log\n");
 
+}
+int stayInButton() {
+    char choice;
+    printf("Would you like to continue, (y)es or (n)o: ");
+    scanf("%c", &choice);
+    clearKeyboardBuffer();
+    while (1) {
+        switch (choice) {
+            case 'y':
+            case 'Y':
+                return 1;
+            case 'n':
+            case 'N':
+                return 0;
+            default:
+                printf("Would you like to continue, Please type (y)es or (n)o: ");
+                scanf("%c", &choice);
+                clearKeyboardBuffer();
+        }
+    }
 }
