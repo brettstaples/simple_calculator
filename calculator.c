@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-void startCalculator(int* onButton);
+int startCalculator();
 void printCalculatorOptions();
 int getCalculatorInput();
 void mathChoice(int calculatorButtonPressed);
@@ -8,23 +8,18 @@ void keepUsingCalculator(int* useCalculator);
 void clearKeyboardBuffer();
 
 int main(int argc, char* argv[]) {
-    int useCalculator;
-    startCalculator(&useCalculator);
+    int useCalculator = startCalculator();
     while (useCalculator) {
-        printCalculatorOptions();
-        int calculatorButtonPressed = getCalculatorInput();
-        mathChoice(calculatorButtonPressed);
-        keepUsingCalculator(&useCalculator);
+        printf("In calc");
+        return 0;
+//        printCalculatorOptions();
+//        int calculatorButtonPressed = getCalculatorInput();
+//        mathChoice(calculatorButtonPressed);
+//        keepUsingCalculator(&useCalculator);
     }
+    printf("Out calc");
+    return 0;
 
-    /*add
-     * sub
-     * mult
-     * div
-     * log
-     * sqrt */
-
-	return 0;
 }
 
 void clearKeyboardBuffer() {
@@ -34,10 +29,23 @@ void clearKeyboardBuffer() {
     } while (ch != '\n');
 }
 
-void startCalculator(int* onButton) {
+int startCalculator() {
+    char choice;
     printf("Would you like to use the calculator, (y)es or (n)o: ");
-    scanf()
-
+    while (1) {
+        scanf("%c", &choice);
+        clearKeyboardBuffer();
+        switch (choice) {
+            case 'y':
+            case 'Y':
+                return 1;
+            case 'n':
+            case 'N':
+                return 0;
+            default:
+                printf("Incorrect answer, (y)es or (n)o: ");
+        }
+    }
 }
 
 void printCalculatorOptions() {
